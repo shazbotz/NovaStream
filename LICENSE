@@ -1,0 +1,39 @@
+Apache License, Version 2.0
+
+SPDX-License-Identifier: Apache-2.0
+
+This project is licensed under the Apache License, Version 2.0.
+
+Why Apache-2.0 (decided as part of Phase 3, per
+open-source-project-structure.md §7): it's the more common choice when
+the explicit goal is a "reusable framework others build upon" (your
+words, from the Phase 1 requirements) rather than a self-hosted service
+you want to prevent closed-source competitors from forking - that's the
+AGPL-3.0 case instead. Apache-2.0 also includes an explicit patent grant,
+which plain MIT doesn't. Revisit this if that goal changes.
+
+ACTION NEEDED BEFORE PUBLISHING: paste the exact, current license text
+from the canonical source below into this file, replacing this notice.
+Search snippets were not used to reconstruct the ~201-line legal text
+here, deliberately - for a legal document, copying it wrong would be
+worse than not having it, so get it from the source instead of a
+patchwork of fragments:
+
+  https://www.apache.org/licenses/LICENSE-2.0.txt
+
+Then add this standard header (with the fields filled in) to the top of
+new source files, per the Apache Foundation's own guidance:
+
+  Copyright [yyyy] [name of copyright owner]
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.

@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install -e ".[dev]"
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Format check
+        run: ruff format --check .
+
+      - name: Type check
+        run: mypy src
+
+      - name: Dependency direction rules
+        run: lint-imports
+
+      - name: Unit tests
+        run: pytest tests/unit -v
+
+  # Integration tests (real adapters against disposable infrastructure)
+  # are added once Phase 3 has a real adapter to test - see
+  # tests/integration/README.md. Intentionally not part of this job so
+  # the fast suite above stays fast on every PR.

@@ -1,0 +1,94 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "media-platform"
+version = "0.1.0"
+description = "{{project.description}}"  # see PROJECT.toml - filled in before publishing
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "{{project.author}}" },
+]
+
+# Deliberately minimal. Dependencies are added only when the feature that
+# needs them is implemented (a real search/storage/database adapter, the
+# bot client, ...) - see architecture-design-phase1.md §1 for the
+# dependency-bloat problem this avoids (the reference bots' 50+ package
+# requirements.txt hurting image size, cold start, and RAM headroom).
+dependencies = [
+    "aiohttp>=3.9",
+]
+
+[project.optional-dependencies]
+mongo = [
+    "motor>=3.5",
+]
+telegram = [
+    # Pin an exact version before production use - not verified against
+    # a specific release here (no network access to check current
+    # versions while writing this). Confirm the installed package
+    # exposes itself under the `pyrogram` import name; if a future
+    # release changes that, update the import in
+    # plugins/providers/telegram_kurigram/provider.py accordingly.
+    "kurigram",
+]
+dev = [
+    "ruff>=0.6",
+    "mypy>=1.10",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "import-linter>=2.0",
+    "pre-commit>=3.7",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+packages = ["media_platform"]
+strict = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.importlinter]
+root_package = "media_platform"
+
+[[tool.importlinter.contracts]]
+name = "Layered architecture: domain <- services <- kernel <- plugins"
+type = "layers"
+layers = [
+    "media_platform.plugins",
+    "media_platform.kernel",
+    "media_platform.services",
+    "media_platform.domain",
+]
+
+[[tool.importlinter.contracts]]
+name = "Domain has no internal dependencies"
+type = "forbidden"
+source_modules = ["media_platform.domain"]
+forbidden_modules = [
+    "media_platform.kernel",
+    "media_platform.services",
+    "media_platform.plugins",
+]
+
+[[tool.importlinter.contracts]]
+name = "Services never import kernel or plugins"
+type = "forbidden"
+source_modules = ["media_platform.services"]
+forbidden_modules = ["media_platform.kernel", "media_platform.plugins"]

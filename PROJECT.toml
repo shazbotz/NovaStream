@@ -1,0 +1,30 @@
+# Single source of truth for project identity/branding, referenced by
+# README.md, docs/, and the Mini App footer via {{project.*}} tokens -
+# see open-source-project-structure.md §2. Application code never reads
+# this file; it's a docs/branding concern only, kept separate from
+# pyproject.toml (the Python package's own metadata) and config.py
+# (runtime configuration).
+#
+# Fill these in before publishing. Nothing here is required for the
+# project to build or run.
+
+[project]
+name = ""              # e.g. "MediaPlatform"
+tagline = ""
+description = ""
+license = "Apache-2.0"  # decided Phase 3 - see LICENSE and open-source-project-structure.md §7
+repository_url = ""
+
+[people]
+author = ""
+maintainer = ""
+github_username = ""
+telegram_username = ""
+
+[links]
+website = ""
+docs_url = ""
+support_chat = ""
+
+[credits]
+special_thanks = []

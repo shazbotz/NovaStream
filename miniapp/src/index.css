@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Telegram Mini Apps run inside a WebView with no browser chrome -
+   these two lines stop iOS's bounce-scroll and text-selection callouts
+   from making the app feel like a web page instead of a native screen. */
+body {
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+}

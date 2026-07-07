@@ -1,1 +1,1 @@
-web: python -m media_platform.server
+web: PYTHONPATH=src python -m media_platform.server

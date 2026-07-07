@@ -1,0 +1,27 @@
+# Auto-generated from pyproject.toml for Koyeb/Heroku Python buildpack
+# compatibility (these buildpacks require a requirements.txt in the repo
+# root; they do not install directly from pyproject.toml).
+#
+# Includes the core runtime dependency plus the "mongo" and "telegram"
+# optional-dependency groups from pyproject.toml, to run the mongo/kurigram
+# adapters (DATABASE_PROVIDER=mongo, SEARCH_PROVIDER=mongo_text,
+# TELEGRAM_PROVIDER=kurigram, STORAGE_PROVIDER=telegram) rather than the
+# null/in-memory bootstrap defaults. Dev-only tools (ruff, mypy, pytest,
+# import-linter, pre-commit) are intentionally excluded.
+#
+# Keep this file in sync with pyproject.toml's [project.dependencies] and
+# [project.optional-dependencies] if those change.
+
+# --- core ---
+aiohttp>=3.9
+
+# --- mongo extra ---
+motor>=3.5
+
+# --- telegram extra ---
+# NOTE: unpinned in pyproject.toml as well - the source comment there
+# flags that no specific version has been verified yet. Pin an exact
+# version here before relying on this in production, and confirm the
+# installed package still exposes the `pyrogram` import name expected by
+# src/media_platform/plugins/providers/telegram_kurigram/provider.py.
+kurigram

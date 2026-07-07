@@ -383,12 +383,11 @@ Good first places to start:
 
 ## 🙌 Credits
 
-**Created and maintained by [{{author.name}}](https://github.com/{{author.github}})**
+**Created and maintained by [SHAZ BOTS](https://t.me/shazbotz)**
 
-- GitHub: [@{{author.github}}](https://github.com/{{author.github}})
-- Contact: {{author.contact}}
-
-See [`AUTHORS`](AUTHORS), [`CONTRIBUTORS`](CONTRIBUTORS), and [`CREDITS.md`](CREDITS.md) for the full list of people and projects this stands on.
+- GitHub: [SHAZ BOTS](https://github.com/shazbotz)
+- Contact: https://t.me/shamil_shaz03
+  
 
 ---
 

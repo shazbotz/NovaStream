@@ -1,32 +1,56 @@
 # Credits
 
-## Inspirations
+## Design Inspiration
 
-This project's architecture draws on engineering patterns studied from
-several open-source Telegram bot projects, then redesigned from scratch -
-see `docs/architecture/overview.md` for the full reasoning. Specific
-techniques carried forward:
+Nova Stream was designed using widely adopted software architecture principles
+and engineering patterns commonly found in modern distributed systems and
+high-performance Telegram applications.
 
-- Producer/consumer bulk-indexing pipelines with bounded concurrency
-- HTTP range-request streaming with concurrent block prefetching
-- Semaphore-bounded broadcast fan-out
-- In-Telegram admin panel UX
+The project was implemented from scratch with its own architecture, plugin
+system, domain model, APIs, and user experience. While general engineering
+approaches were studied from public resources, no project's source code or
+overall architecture was copied.
 
-These are credited as techniques, not as a fork - this project's plugin
-architecture, port/adapter interfaces, and feature set were designed
-independently. See `architecture-design-phase1.md` for the reference
-material reviewed.
+Some engineering concepts adopted include:
 
-## Upstream projects
+- Concurrent producer/consumer indexing pipelines
+- HTTP range-based media streaming
+- Background task scheduling with bounded concurrency
+- Plugin-based modular architecture
+- Dependency injection and service abstraction
+- Scalable caching and asynchronous processing
+- Telegram-native administrative workflows
 
-- [aiohttp](https://github.com/aio-libs/aiohttp) - async HTTP server
-- (Additional libraries are added here as they're introduced - see
-  `pyproject.toml` for the current dependency list.)
+For more information about the architectural decisions, see:
 
-## Contributors
+- `docs/architecture/overview.md`
+- `docs/design-log/`
 
-_Populated as people contribute - see `CONTRIBUTORS`._
+---
 
-## Special thanks
+# Third-Party Libraries
 
-{{project.credits.special_thanks}}
+Nova Stream is built using several excellent open-source projects.
+
+- aiohttp — Async HTTP server
+- Motor — Async MongoDB driver
+- Pyrogram / Kurigram — Telegram MTProto framework
+- Pydantic — Configuration and validation
+- Additional dependencies are listed in `pyproject.toml`.
+
+---
+
+# Contributors
+
+Nova Stream is currently maintained by its author.
+
+Community contributions are welcome through pull requests, bug reports,
+feature requests, and documentation improvements.
+
+---
+
+# Acknowledgements
+
+Special thanks to the open-source community for providing the tools,
+libraries, documentation, and educational resources that made this project
+possible.

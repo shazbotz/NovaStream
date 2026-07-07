@@ -48,6 +48,8 @@ class ProviderContext:
 
     providers: ProviderRegistry
     config: Settings
+    commands: CommandRegistry
+    callbacks: CallbackRegistry
 
 
 @dataclass(frozen=True)

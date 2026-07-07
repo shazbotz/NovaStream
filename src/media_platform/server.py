@@ -128,8 +128,21 @@ async def build_application() -> tuple[web.Application, Scheduler, Lifecycle, ob
     provider_registry = ProviderRegistry()
     plugin_manager = PluginManager()
 
+    # Built before Pass 1 (rather than at the top of Pass 2, where they
+    # used to live) because the telegram provider needs a reference to
+    # both registries at construction time, to wire inbound Telegram
+    # updates to whatever commands/callbacks Pass 2 feature plugins go on
+    # to register into them. The registries are still empty at this
+    # point - that's fine, the telegram provider only needs the object
+    # references now, and resolves commands/callbacks from them later, at
+    # actual-message time (well after Pass 2 has populated them).
+    commands = CommandRegistry()
+    callbacks = CallbackRegistry()
+
     # --- Pass 1: provider plugins ---------------------------------------
-    provider_ctx = ProviderContext(providers=provider_registry, config=settings)
+    provider_ctx = ProviderContext(
+        providers=provider_registry, config=settings, commands=commands, callbacks=callbacks
+    )
     plugin_manager.load_package(PROVIDER_PACKAGE, provider_ctx, disabled=disabled)
     logger.info("Loaded providers: %s", plugin_manager.loaded_plugin_names())
 
@@ -166,8 +179,10 @@ async def build_application() -> tuple[web.Application, Scheduler, Lifecycle, ob
     )
 
     # --- Pass 2: feature plugins ------------------------------------------
-    commands = CommandRegistry()
-    callbacks = CallbackRegistry()
+    # `commands`/`callbacks` were already constructed before Pass 1 (see
+    # above) - reused here, not rebuilt, so the same registry instances
+    # the telegram provider holds a reference to are the ones feature
+    # plugins populate.
     api = ApiRouter()
     scheduler = Scheduler()
     plugin_settings = SettingsRegistry()

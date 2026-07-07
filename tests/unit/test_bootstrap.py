@@ -49,7 +49,12 @@ async def test_full_bootstrap_wiring(settings):
     registry = ProviderRegistry()
     manager = PluginManager()
 
-    provider_ctx = ProviderContext(providers=registry, config=settings)
+    provider_ctx = ProviderContext(
+        providers=registry,
+        config=settings,
+        commands=CommandRegistry(),
+        callbacks=CallbackRegistry(),
+    )
     manager.load_package(PROVIDER_PACKAGE, provider_ctx)
     # 9 = the 6 original bootstrap-phase adapters + this pass's
     # `streaming_signed` and `storage_telegram` + the pre-existing

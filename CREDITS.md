@@ -2,56 +2,31 @@
 
 ## Inspirations
 
-This project's architecture draws on engineering patterns studied from several open-source Telegram projects and modern software architecture practices. The implementation was redesigned from scratch around a plugin-based, ports-and-adapters architecture.
-
-The following engineering concepts inspired parts of the implementation:
+This project's architecture draws on engineering patterns studied from
+several open-source Telegram bot projects, then redesigned from scratch -
+see `docs/architecture/overview.md` for the full reasoning. Specific
+techniques carried forward:
 
 - Producer/consumer bulk-indexing pipelines with bounded concurrency
 - HTTP range-request streaming with concurrent block prefetching
 - Semaphore-bounded broadcast fan-out
-- Telegram bot administration workflows
-- Plugin-based application architecture
+- In-Telegram admin panel UX
 
-These are credited as engineering concepts only. Nova Stream is an original implementation and is not a fork of any existing project.
+These are credited as techniques, not as a fork - this project's plugin
+architecture, port/adapter interfaces, and feature set were designed
+independently. See `architecture-design-phase1.md` for the reference
+material reviewed.
 
----
+## Upstream projects
 
-## Open Source Libraries
-
-Nova Stream is built on top of several excellent open-source projects, including:
-
-- aiohttp
-- Kurigram
-- Motor
-- PyMongo
-- Python
-- React
-- Vite
-
-Additional libraries can be found in `pyproject.toml`.
-
----
+- [aiohttp](https://github.com/aio-libs/aiohttp) - async HTTP server
+- (Additional libraries are added here as they're introduced - see
+  `pyproject.toml` for the current dependency list.)
 
 ## Contributors
 
-Contributions are welcome.
+_Populated as people contribute - see `CONTRIBUTORS`._
 
-See `CONTRIBUTORS.md` for the complete contributor list.
+## Special thanks
 
----
-
-## Created By
-
-**SHAZ BOTS**
-
-Project Lead: **Muhammed Shamil**
-
-GitHub: https://github.com/shazbotz
-
-Telegram: https://t.me/shamil_shaz03
-
----
-
-## Special Thanks
-
-Thanks to the open-source community and everyone who contributes ideas, bug reports, testing, and improvements to Nova Stream.
+{{project.credits.special_thanks}}

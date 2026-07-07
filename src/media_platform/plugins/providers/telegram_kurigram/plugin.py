@@ -44,6 +44,8 @@ class TelegramKurigramProviderPlugin:
                 bot_token=ctx.config.bot_token,
                 api_id=ctx.config.api_id,
                 api_hash=ctx.config.api_hash,
+                commands=ctx.commands,
+                callbacks=ctx.callbacks,
             )
 
         ctx.providers.register("telegram", "kurigram", build)
